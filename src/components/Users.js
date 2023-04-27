@@ -8,7 +8,7 @@ import { ViewUser } from "./Form/View";
 import { Insert } from "./Form/Insert";
 import { EditUser } from "./Form/Edit";
 import { toast } from "react-toastify";
-export function Users () {
+export function Users (image) {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedUser, setselectedUser] = useState(null);
@@ -175,6 +175,7 @@ export function Users () {
           setOpenEdit={setOpenEdit}
           selectedEdit={selectedEdit}
           update={update}
+          image={image}
         />
       )}
       {openView && (

@@ -87,7 +87,7 @@ export function Register() {
                 .then((res) => {
                   if (res.data.status === 200) {
                     toast(`${res.data.massage}`);
-                    navigate("/login");
+                    navigate("/");
                     setLoading(false);
                   } else if (res.data.status === 201) {
                     toast.error(`${res.data.massage}`);
@@ -105,7 +105,7 @@ export function Register() {
             <Typography component="h2">
               Already have an account ? Register
             </Typography>
-            <Link className="nav-link active text-primary" to={"/login"}>
+            <Link className="nav-link active text-primary" to={"/"}>
               Here
             </Link>
           </Stack>

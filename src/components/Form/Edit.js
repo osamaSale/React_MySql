@@ -8,7 +8,7 @@ import Sheet from "@mui/joy/Sheet";
 import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import axios from "axios";
-export function EditUser({ openEdit, setOpenEdit, selectedEdit, update }) {
+export function EditUser({ openEdit, setOpenEdit, selectedEdit, update, image }) {
   const [name, setName] = useState(selectedEdit ? selectedEdit.name : "");
   const [email, setEmail] = useState(selectedEdit ? selectedEdit.email : "");
   const [password, setPassword] = useState(
@@ -124,6 +124,7 @@ export function EditUser({ openEdit, setOpenEdit, selectedEdit, update }) {
                     console.log(res);
                     if (res.data.status === 200) {
                       toast(`${res.data.massage}`);
+                      window.localStorage.setItem('image', res.data.result.image)
                       update();
                       setLoading(false);
                       setOpenEdit(false);

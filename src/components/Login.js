@@ -46,9 +46,22 @@ export function Login() {
                   .post("http://localhost:5000/login", { email, password })
                   .then((res) => {
                     if (res.data.status === 200) {
-                      toast(`${res.data.massage}`);
-                      setLoading(false);
-                      navigate("/");
+                      if (res.data.result[0].authorization === 'admin') {
+                        localStorage.setItem('id', res.data.result[0].id)
+                        localStorage.setItem('name', res.data.result[0].name)
+                        localStorage.setItem('image', res.data.result[0].image)
+                        localStorage.setItem('authorization', res.data.result[0].authorization)
+                        toast(`${res.data.massage}`);
+                        setLoading(false);
+                        navigate("/users");
+                      } else {
+                        localStorage.setItem('id', res.data.result[0].id)
+                        localStorage.setItem('name', res.data.result[0].name)
+                        localStorage.setItem('image', res.data.result[0].image)
+                        localStorage.setItem('authorization', res.data.result[0].authorization)
+                        toast(`${res.data.massage}`);
+                        navigate("/home")
+                      }
                     } else if (res.data.status === 201) {
                       toast.error(`${res.data.massage}`);
                       setLoading(false);
@@ -58,6 +71,7 @@ export function Login() {
                     }
                   });
               }}
+              variant="solid"
             >
               {loading ? <CircularProgress /> : "Save"}
             </Button>
