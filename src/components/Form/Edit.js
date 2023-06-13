@@ -8,7 +8,7 @@ import Sheet from "@mui/joy/Sheet";
 import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import axios from "axios";
-export function EditUser({ openEdit, setOpenEdit, selectedEdit, update, image }) {
+export function EditUser({ openEdit, setOpenEdit, selectedEdit, update }) {
   const [name, setName] = useState(selectedEdit ? selectedEdit.name : "");
   const [email, setEmail] = useState(selectedEdit ? selectedEdit.email : "");
   const [password, setPassword] = useState(
@@ -18,9 +18,7 @@ export function EditUser({ openEdit, setOpenEdit, selectedEdit, update, image })
   const [authorization, setAuthorization] = useState(
     selectedEdit ? selectedEdit.authorization : ""
   );
-  const [fileImage, setFileImage] = useState(
-    selectedEdit ? selectedEdit.fileImage : null
-  );
+  const [image, setImage] = useState(selectedEdit ? selectedEdit.image : null);
   const [loading, setLoading] = useState(false);
   return (
     <Modal
@@ -83,9 +81,9 @@ export function EditUser({ openEdit, setOpenEdit, selectedEdit, update, image })
           </select>
           <input
             type="file"
-            name="fileImage"
+            name="image"
             className="form-control"
-            onChange={(e) => setFileImage(e.target.files[0])}
+            onChange={(e) => setImage(e.target.files[0])}
           />
           <img
             src={selectedEdit.image}
@@ -108,16 +106,16 @@ export function EditUser({ openEdit, setOpenEdit, selectedEdit, update, image })
                 fromData.append("password", password);
                 fromData.append("phone", phone);
                 fromData.append("authorization", authorization);
-                if (fileImage !== "") {
-                  selectedEdit.fileImage = fileImage;
-                  fromData.append("fileImage", selectedEdit.fileImage);
+                if (image !== "") {
+                  selectedEdit.image = image;
+                  fromData.append("image", selectedEdit.image);
                 } else {
-                  fromData.append("fileImage", fileImage, fileImage.name);
+                  fromData.append("image", image, image.name);
                 }
                 setLoading(true);
                 axios
                   .put(
-                    `http://localhost:5000/users/${selectedEdit.id}`,
+                    `http://localhost:5000/users/${selectedEdit._id}`,
                     fromData
                   )
                   .then((res) => {

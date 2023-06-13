@@ -16,7 +16,7 @@ export function Insert({ openAdd, setOpenAdd, user, update }) {
   const [authorization, setAuthorization] = useState(
     user ? user.authorization : ""
   );
-  const [fileImage, setFileImage] = useState(user ? user.fileImage : null);
+  const [image, setImage] = useState(user ? user.fileImage : null);
   const [loading, setLoading] = useState(false);
   return (
     <Modal
@@ -72,9 +72,9 @@ export function Insert({ openAdd, setOpenAdd, user, update }) {
           </select>
           <input
             type="file"
-            name="fileImage"
+            name="image"
             className="form-control"
-            onChange={(e) => setFileImage(e.target.files[0])}
+            onChange={(e) => setImage(e.target.files[0])}
           />
           <Stack
             direction="row-reverse"
@@ -90,8 +90,8 @@ export function Insert({ openAdd, setOpenAdd, user, update }) {
                 fromData.append("password", password);
                 fromData.append("phone", phone);
                 fromData.append("authorization", authorization);
-                if (fileImage) {
-                  fromData.append("fileImage", fileImage, fileImage.name);
+                if (image) {
+                  fromData.append("image", image, image.name);
                 }
                 setLoading(true);
 

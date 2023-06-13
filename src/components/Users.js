@@ -8,7 +8,7 @@ import { ViewUser } from "./Form/View";
 import { Insert } from "./Form/Insert";
 import { EditUser } from "./Form/Edit";
 import { toast } from "react-toastify";
-export function Users (image) {
+export function Users () {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedUser, setselectedUser] = useState(null);
@@ -22,6 +22,7 @@ export function Users (image) {
   }, []);
   const update = async () => {
     await axios.get("http://localhost:5000/users").then((res) => {
+      console.log(res)
       if (res.data.status === 200) {
         setUsers(res.data.result);
       } else if (res.data.status === 202) {
@@ -83,7 +84,7 @@ export function Users (image) {
                 name: "",
                 email: "",
                 password: "",
-                fileImage: "",
+                image: "",
                 phone: "",
                 authorization: "",
               });
@@ -175,7 +176,6 @@ export function Users (image) {
           setOpenEdit={setOpenEdit}
           selectedEdit={selectedEdit}
           update={update}
-          image={image}
         />
       )}
       {openView && (

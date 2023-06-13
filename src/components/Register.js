@@ -15,7 +15,7 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [authorization, setAuthorization] = useState("");
-  const [fileImage, setFileImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   return (
@@ -65,9 +65,9 @@ export function Register() {
           </select>
           <input
             type="file"
-            name="fileImage"
+            name="image"
             className="form-control"
-            onChange={(e) => setFileImage(e.target.files[0])}
+            onChange={(e) => setImage(e.target.files[0])}
           />
           <Button
             onClick={() => {
@@ -77,8 +77,8 @@ export function Register() {
               fromData.append("password", password);
               fromData.append("phone", phone);
               fromData.append("authorization", authorization);
-              if (fileImage) {
-                fromData.append("fileImage", fileImage, fileImage.name);
+              if (image) {
+                fromData.append("image", image, image.name);
               }
               setLoading(true);
 
